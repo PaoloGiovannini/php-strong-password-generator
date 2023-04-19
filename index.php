@@ -1,10 +1,5 @@
 <?php
-$password_length = $_GET['length'];
-
-function generatePassword($length){
-    $characters = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!?@&#=&%';
-    return substr(str_shuffle($characters), 0, $length);
-}
+include __DIR__ . './function.php'
 ?>
 
 <!DOCTYPE html>
@@ -21,11 +16,13 @@ function generatePassword($length){
     <h1>Strong Password Generator</h1>
     <form action="index.php" method="GET">
         <label for="length">Inserisci la lunghezza della password:</label>
-        <input type="number" id="length" name="length">
+        <input type="number" id="length" name="length" value="<?php echo $password_length ?>">
         <button>Invia</button>
     </form>
     <?php if(!empty($password_length) && $password_length > 0){
-        echo '<p> La Password è: ' .generatePassword($password_length);
+        echo '<p> La Password è: ' .generatePassword($password_length) .'</p>';
+    }else{
+        echo '<h3> Inserisci un numero valido! </h3> ';
     } ?>
 </body>
 
